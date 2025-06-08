@@ -13,7 +13,7 @@ git clone (your openwrt source)
 
 cd source
 
-echo "src-git cups https://github.com/SoPudge/lede-cups" >> feeds.conf.default
+echo "src-git cups https://github.com/AirplayAudio/CUPS" >> feeds.conf.default
 
 ./scripts/feeds update -a
 
