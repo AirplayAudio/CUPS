@@ -8,18 +8,19 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=poppler
-PKG_VERSION:=22.01.0
+PKG_VERSION:=22.12.0
 PKG_RELEASE:=1
 
-PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
-PKG_SOURCE_URL:=https://github.com/freedesktop/poppler/archive/refs/tags/
-PKG_MD5SUM:=c2cbd8d8b276b8fe51f0fc86e133afe5
+PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.xz
+PKG_SOURCE_URL:=https://poppler.freedesktop.org/
+PKG_MD5SUM:=39b6a69eceba6adb8afbcee8d47385fd
 
 PKG_INSTALL:=1
 
-CMAKE_SOURCE_SUBDIR:=$(PKG_NAME)-$(PKG_NAME)-$(PKG_VERSION)
+#CMAKE_SOURCE_SUBDIR:=$(PKG_NAME)-$(PKG_NAME)-$(PKG_VERSION)
 
 include $(INCLUDE_DIR)/package.mk
+include $(INCLUDE_DIR)/cmake.mk
 
 define Package/poppler
   SECTION:=utils
@@ -34,20 +35,20 @@ define Package/poppler/description
 	Poppler is a PDF rendering library based on the xpdf-3.0 code base.
 endef
 
-CONFIGURE_ARGS+= \
-	--without-x \
-	--disable-gtk-test \
-	--disable-poppler-qt4 \
-	--disable-poppler-qt5 \
-	--disable-gtk-doc-html \
-	--enable-gtk-doc-html=no \
-	--enable-poppler-cpp \
-	--enable-xpdf-headers \
-	--enable-zlib \
-	--enable-libjpeg \
-	--enable-cms=lcms2 \
-	--disable-poppler-cpp \
-	--with-font-configuration=fontconfig
+CMAKE_OPTIONS += \
+	-DENABLE_X11=OFF \
+	-DENABLE_GTK_DOC=OFF \
+	-DENABLE_QT5=OFF \
+	-DENABLE_QT6=OFF \
+	-DENABLE_CPP=ON \
+	-DENABLE_ZLIB=ON \
+	-DENABLE_LIBJPEG=ON \
+	-DENABLE_CMS=lcms2 \
+	-DWITH_FONT_CONFIGURATION=fontconfig \
+	-DENABLE_UNSTABLE_API_ABI_HEADERS=ON \
+	-DENABLE_BOOST=OFF \
+  -DENABLE_LIBOPENJPEG=none
+ 
 
 define Package/poppler/install
 	$(INSTALL_DIR) $(1)/usr/bin $(1)/usr/lib

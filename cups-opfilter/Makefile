@@ -5,11 +5,11 @@
 
 include $(TOPDIR)/rules.mk
 
-PKG_NAME:=cups-opfilter
+PKG_NAME:=cups-filters
 PKG_VERSION:=1.28.11
 PKG_RELEASE:=1
 
-PKG_SOURCE:=$(PKG_REALNAME)-$(PKG_VERSION).tar.gz
+PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
 PKG_SOURCE_URL:=https://github.com/OpenPrinting/cups-filters/releases/download/$(PKG_VERSION)/
 PKG_MD5SUM:=5265c07dc794ae945d118b0e43900609
 PKG_BUILD_DIR:=$(BUILD_DIR)/cups-filters-$(PKG_VERSION)
